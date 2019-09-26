@@ -81,12 +81,13 @@ public class FoodController {
   }
 
   @PUT
+  @Path("/update/{id}")
   @Consumes(MediaType.APPLICATION_JSON)
   public Response updateFood(Food food) {
 
     try {
       foodService.upsert(food);
-      String result = "Food list updated : " + food.getName() + " " + food.getPrice() + "" + food.isInStock();
+      String result = "Food list updated : " + food.getName() + " " + food.getPrice() + " " + food.isInStock();
       return Response.status(200).entity(result).build();
     } catch (Exception e) {
       throw new WebApplicationException(e);

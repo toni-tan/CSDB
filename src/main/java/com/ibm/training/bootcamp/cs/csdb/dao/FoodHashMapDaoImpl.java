@@ -74,12 +74,13 @@ public class FoodHashMapDaoImpl implements FoodDao {
   }
   
 
-  @Override
+  
   public void add(Food food) {
     if (food != null && food.getId() == null) {
       food.setId(id++);
       FOOD_STORE.put(food.getId(), food);
     }
+//    return false;
   }
 
   @Override
