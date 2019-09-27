@@ -74,7 +74,7 @@ public class OrderController {
       String result = "Order list saved : " + order.getcName() + " " + order.getAddress() + " "
           + order.getContact() + " " + order.getTotal() + " "  
               + order.getCalculatedTotal() + " " + order.getStatus() + " " 
-                  + order.getQuantity() + " "+ order.getId() ;
+                  + order.getQuantity();
       return Response.status(201).entity(result).build();
     } catch (Exception e) {
       throw new WebApplicationException(e);
@@ -83,7 +83,7 @@ public class OrderController {
   }
 
   @PUT
-  @Path("/update/{id}")
+  @Path("/update/{order_id}")
   @Consumes(MediaType.APPLICATION_JSON)
   public Response updateOrder(Order order) {
 
@@ -92,7 +92,7 @@ public class OrderController {
       String result = "Order list updated : " + order.getcName() + " " + order.getAddress() + " "
           + order.getContact() + " " + order.getTotal() + " "  
           + order.getCalculatedTotal() + " " + order.getStatus() + " " 
-              + order.getQuantity() + " "+ order.getId() ;
+              + order.getQuantity();
       return Response.status(200).entity(result).build();
     } catch (Exception e) {
       throw new WebApplicationException(e);

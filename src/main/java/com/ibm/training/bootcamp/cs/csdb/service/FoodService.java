@@ -12,7 +12,7 @@ public interface FoodService {
  
   public List<Food> findByName(String name);
   
-  public void add(Food food);
+  public String add(Food food);
   
   public void upsert(Food food);
   

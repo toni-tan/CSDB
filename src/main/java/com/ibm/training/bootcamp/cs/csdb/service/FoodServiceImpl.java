@@ -33,12 +33,21 @@ public class FoodServiceImpl implements FoodService {
   }
 
   @Override
-  public void add(Food food) {
+  public String add(Food food) {
+    String serviceMessage;
+    
     if (validate(food)) {
-      foodDao.add(food);
+      if(foodDao.add(food)) {
+        serviceMessage = "Food name already exists";
+      }
+      else {
+        serviceMessage = "Food name is saved.";
+      }
     } else {
       throw new IllegalArgumentException("Fields cannot be blank.");
     }
+    
+    return serviceMessage;
   }
 
   @Override

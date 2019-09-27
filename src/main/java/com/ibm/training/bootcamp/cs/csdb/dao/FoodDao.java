@@ -14,9 +14,11 @@ public interface FoodDao {
   
   public List<Food> findByName(String name);
   
-  public void add(Food food);
+  public boolean add(Food food);
   
   public void update(Food food);
+  
+  public boolean findExisting(String name);
   
 
 }

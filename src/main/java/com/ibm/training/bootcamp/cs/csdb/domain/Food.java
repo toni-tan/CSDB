@@ -7,12 +7,14 @@ public class Food {
   private String name;
   private BigDecimal price;
   private boolean inStock;
+//  private Long order_id;
   
   public Food() {
   }
   
   public Food(String name, BigDecimal price, boolean inStock) {
     this(null, name, price, inStock);
+//        order_id);
   }
 
   public Food(Long id, String name, BigDecimal price, boolean inStock) {
@@ -20,6 +22,7 @@ public class Food {
     this.name = name;
     this.price = price;
     this.inStock = inStock;
+//    this.order_id = order_id;
   }
 
   public Long getId() {
@@ -53,6 +56,14 @@ public class Food {
   public void setInStock(boolean inStock) {
     this.inStock = inStock;
   }
-  
+
+//  public Long getOrder_id() {
+//    return order_id;
+//  }
+//
+//  public void setOrder_id(Long order_id) {
+//    this.order_id = order_id;
+//  }
+//  
   
 }

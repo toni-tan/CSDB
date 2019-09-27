@@ -75,12 +75,12 @@ public class FoodHashMapDaoImpl implements FoodDao {
   
 
   
-  public void add(Food food) {
+  public boolean add(Food food) {
     if (food != null && food.getId() == null) {
       food.setId(id++);
       FOOD_STORE.put(food.getId(), food);
     }
-//    return false;
+  return false;
   }
 
   @Override
@@ -88,6 +88,12 @@ public class FoodHashMapDaoImpl implements FoodDao {
     if (food != null && food.getId() != null) {
       FOOD_STORE.put(food.getId(), food);
     }
+  }
+
+  @Override
+  public boolean findExisting(String name) {
+    // TODO Auto-generated method stub
+    return false;
   }
 
 

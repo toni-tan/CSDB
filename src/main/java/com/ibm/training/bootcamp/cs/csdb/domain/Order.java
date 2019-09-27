@@ -11,7 +11,7 @@ public class Order {
   private BigDecimal calculatedTotal;
   private int status;
   private int quantity;
-  private Long id;
+//  private Long id;
   
   public Order() {
     
@@ -19,12 +19,12 @@ public class Order {
   
   public Order(String cName, String address, String contact, BigDecimal total,
       BigDecimal calculatedTotal, int status, int quantity, Long id) {
-    this(null, cName, address, contact, total, calculatedTotal, status,quantity,id);
+    this(null, cName, address, contact, total, calculatedTotal, status,quantity);
   }
 
   public Order(Long order_id, String cName, String address, String contact,
-      BigDecimal total, BigDecimal calculatedTotal, int status, int quantity,
-      Long id) {
+      BigDecimal total, BigDecimal calculatedTotal, int status, int quantity
+      ) {
     this.order_id = order_id;
     this.cName = cName;
     this.address = address;
@@ -33,7 +33,7 @@ public class Order {
     this.calculatedTotal = calculatedTotal;
     this.status = status;
     this.quantity = quantity; 
-    this.id = id;    
+//    this.id = id;    
   }
 
   public Long getOrder_id() {
@@ -100,13 +100,6 @@ public class Order {
     this.quantity = quantity;
   }
 
-  public Long getId() {
-    return id;
-  }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-  
   
 }

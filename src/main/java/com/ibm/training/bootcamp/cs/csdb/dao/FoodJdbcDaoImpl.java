@@ -47,12 +47,18 @@ public class FoodJdbcDaoImpl implements FoodDao{
   }
 
   private void createFoodTable() {
+//    String dropSql = "DROP TABLE PUBLIC.FOOD";
+    
     String createSql = "CREATE TABLE FOOD " + "(id INTEGER IDENTITY PRIMARY KEY, " + 
-  " name VARCHAR(255), " + " price DECIMAL(9,2), "  + "inStock BOOLEAN)";
+  " name VARCHAR(255), " + " price DECIMAL(9,2), "  + "inStock BOOLEAN) ";
+   
+//    String alterSql = "ALTER TABLE food ADD FOREIGN KEY(order_id) REFERENCES orders(order_id)";
 
     try (Connection conn = dataSource.getConnection(); Statement stmt = conn.createStatement()) {
-
+      
+//      stmt.executeUpdate(dropSql);
       stmt.executeUpdate(createSql);
+//      stmt.executeUpdate(alterSql);
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -137,7 +143,10 @@ public class FoodJdbcDaoImpl implements FoodDao{
   }
   
   @Override
-  public void add(Food food) {
+  public boolean add(Food food) {
+    boolean ifFoodNameExists = findExisting(food.getName());
+    
+    if (ifFoodNameExists == false) {
     
     String insertSql = "INSERT INTO FOOD (name, price, inStock) VALUES (?, ?, ?)";
 
@@ -146,13 +155,48 @@ public class FoodJdbcDaoImpl implements FoodDao{
       ps.setString(1, food.getName());
       ps.setBigDecimal(2, food.getPrice());
       ps.setBoolean(3, food.isInStock());
+//      ps.setLong(4, food.getOrder_id());
       ps.executeUpdate();
 
     } catch (SQLException e) {
       e.printStackTrace();
       throw new RuntimeException(e);
     }
+    }
+    
+    return ifFoodNameExists;
   }
+  
+  @Override 
+  public boolean findExisting(String name) {
+    boolean ifFoodNameExists = false;
+    
+    if(name != null) {
+      String sql = "SELECT * FROM FOOD WHERE name LIKE ?";
+
+      try (Connection conn = dataSource.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setString(1, createSearchValue(name));
+        
+        ResultSet results = ps.executeQuery();
+
+        if (results.next()) {
+//          Food f = new Food(Long.valueOf(results.getInt("id")), results.getString("name"), results.getBigDecimal("price"),
+//              results.getBoolean("inStock"));
+//          food.add(f);    
+          ifFoodNameExists = true;
+        }
+
+      } catch (SQLException e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+      }
+    }
+    return ifFoodNameExists;
+
+      
+    }
+  
 
   @Override
   public void update(Food food) {
@@ -163,6 +207,7 @@ public class FoodJdbcDaoImpl implements FoodDao{
       ps.setString(1, food.getName());
       ps.setBigDecimal(2, food.getPrice());
       ps.setBoolean(3, food.isInStock());
+//      ps.setLong(4, food.getOrder_id());
       ps.setLong(4, food.getId());
       ps.executeUpdate();
 

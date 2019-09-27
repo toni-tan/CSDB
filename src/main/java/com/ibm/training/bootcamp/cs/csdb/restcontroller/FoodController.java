@@ -72,7 +72,8 @@ public class FoodController {
 
     try {
      foodService.add(food);
-      String result = "Food list saved : " + food.getName() + " " + food.getPrice() + "" + food.isInStock();
+      String result = foodService.add(food);
+//     String result = "Food list added : " + food.getName() + " " + food.getPrice() + " " + food.isInStock();
       return Response.status(201).entity(result).build();
     } catch (Exception e) {
       throw new WebApplicationException(e);
